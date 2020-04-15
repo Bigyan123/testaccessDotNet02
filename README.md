@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Kount Access API SDK
 
 ## Overview
@@ -43,3 +44,9 @@ Kount Access API Versions:
 * 0400 (default)
 
 For more information on using this library, consult the wiki section.
+=======
+# testaccessDotNet02
+testAccess02
+
+
+>>>>>>> b2dfc616e549c4a77e72c806f666572db9d328ba
