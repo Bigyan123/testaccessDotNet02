@@ -15,5 +15,7 @@ namespace KountAccessSdk.Models
         [JsonProperty("trusted")]
         public TrustState Trusted { get; set; }
 
+        [JsonProperty("behavioSec")]
+        public BehavioSec BehavioSec { get; set; }
     }
 }

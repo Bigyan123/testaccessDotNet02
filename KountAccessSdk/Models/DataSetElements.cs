@@ -13,6 +13,7 @@ namespace KountAccessSdk.Models
         const int VELOCITY = 2;
         const int DECISION = 4;
         const int TRUSTED = 8;
+        const int BEHAVIOSEC = 16;
 
         public DataSetElements WithInfo()
         {
@@ -35,6 +36,12 @@ namespace KountAccessSdk.Models
         public DataSetElements WithTrusted()
         {
             this.value = this.value | TRUSTED;
+            return this;
+        }
+
+        public DataSetElements WithBehavioSec()
+        {
+            this.value = this.value | BEHAVIOSEC;
             return this;
         }
 

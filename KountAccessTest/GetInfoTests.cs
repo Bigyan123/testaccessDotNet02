@@ -125,6 +125,10 @@ namespace KountAccessTest
         [TestCase(1)] // WithInfo
         [TestCase(8)] // WithTrusted
         [TestCase(9)] // WithInfo and WithTrusted
+        [TestCase(16)] // WithBehavioSec
+        [TestCase(17)] // WithInfo and WithBehavioSec
+        [TestCase(24)] // WithTrusted and WithBehavioSec
+        [TestCase(25)] // WithInfo, WithTrusted and WithBehavioSec
         public void TestGetInfoWithoutUser_ShouldPassValidation(int dataSetNumber)
         {
             DataSetElements dataSets = GetDataSetElementsFromExpectedValueAfterBuild(dataSetNumber);
@@ -182,6 +186,10 @@ namespace KountAccessTest
         [TestCase(1)] // WithInfo
         [TestCase(8)] // WithTrusted
         [TestCase(9)] // WithInfo and WithTrusted
+        [TestCase(16)] // WithBehavioSec
+        [TestCase(17)] // WithInfo and WithBehavioSec
+        [TestCase(24)] // WithTrusted and WithBehavioSec
+        [TestCase(25)] // WithInfo, WithTrusted and WithBehavioSec
         public void TestGetInfoWithoutPassword_ShouldPassValidation(int dataSetNumber)
         {
             DataSetElements dataSets = GetDataSetElementsFromExpectedValueAfterBuild(dataSetNumber);
@@ -265,6 +273,12 @@ namespace KountAccessTest
             if ((expectedValue & trusted) == trusted)
             {
                 dse.WithTrusted();
+            }
+
+            var behavioSec = new DataSetElements().WithBehavioSec().Build();
+            if ((expectedValue & behavioSec) == behavioSec)
+            {
+                dse.WithBehavioSec();
             }
 
             if (expectedValue != dse.Build())

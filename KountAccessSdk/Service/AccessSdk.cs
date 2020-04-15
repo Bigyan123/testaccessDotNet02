@@ -38,6 +38,7 @@ namespace KountAccessSdk.Service
         private const string DeviceTrustBySessionEndpoint = "/api/devicetrustbysession";
         private const string DeviceTrustByDeviceEndpoint = "/api/devicetrustbydevice";
 
+
         private readonly string _apiKey;
         private readonly string _encodedCredentials;
         private readonly string _host;
@@ -45,6 +46,29 @@ namespace KountAccessSdk.Service
 
         private readonly string _version;
         private readonly IWebClientFactory _webClientFactory;
+
+        //public string BehavioHost { get; set; }
+
+        //string _behavioEnvironment;
+        //public string BehavioEnvironment
+        //{
+        //    get { return _behavioEnvironment; }
+        //    set
+        //    {
+        //        var v = value;
+        //        if (!string.IsNullOrEmpty(value))
+        //        {
+        //            v = v.TrimEnd('/');
+
+        //            if (!v.StartsWith("/"))
+        //            {
+        //                v = "/" + v;
+        //            }
+        //        }
+
+        //        _behavioEnvironment = v;
+        //    }
+        //}
 
         /// <summary>
         /// Creates instance of the AccessSdk, allowing the client to specify version of responses to request.
@@ -54,7 +78,6 @@ namespace KountAccessSdk.Service
         /// <param name="apiKey">apiKey The API Key for the merchant.</param>
         /// <param name="version">version The version of the API response to return.</param>
         /// <param name="webClientFactory">Used for webClient mockup in tests.</param>
-      
         public AccessSdk(string host, int merchantId, string apiKey, string version = DefaultVersion, IWebClientFactory webClientFactory = null, string behavioHost = null, string behavioEnvironment = null)
         {
             if (webClientFactory == null)
@@ -87,6 +110,9 @@ namespace KountAccessSdk.Service
             }
 
             this._host = host;
+
+            //this.BehavioHost = behavioHost;
+            //this.BehavioEnvironment = behavioEnvironment;
 
             ILoggerFactory factory = LogFactory.GetLoggerFactory();
             this._logger = factory.GetLogger(typeof(AccessSdk).ToString());
@@ -623,7 +649,7 @@ namespace KountAccessSdk.Service
             }
         }
 
- 
+      
         private void PrepareWebClient(WebClient client, bool isPostWithUrlParams = false)
         {
             client.Headers.Add(HttpRequestHeader.Accept, "application/json");
@@ -643,6 +669,7 @@ namespace KountAccessSdk.Service
             client.BaseAddress = this._host;
             client.Encoding = System.Text.Encoding.UTF8;
         }
+
 
         private NameValueCollection GetRequestedParams(string sessionId = null, string username = null, string password = null, string uniq = null, int i = 0, string timing = null, string ts = null, string d = null, bool addMerchentId = false, bool addVersion = true)
         {
@@ -790,7 +817,7 @@ namespace KountAccessSdk.Service
             ValidateSession(sessionId);
 
             var trusted = new DataSetElements().WithTrusted().Build();
-
+           
             var velocity = new DataSetElements().WithVelocity().Build();
             var decision = new DataSetElements().WithDecision().Build();
             // username and password are required if velocity or decision data is requested

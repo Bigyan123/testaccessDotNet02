@@ -45,22 +45,18 @@ namespace KountAccessExample
         /**
          * Merchant's customer ID at Kount. This should be the id you were issued from Kount.
          */
-        private int merchantId = 900432;
+        private int merchantId = 0;
 
         /**
          * This should be the API Key you were issued from Kount.
          */
-        //private string apiKey = "PUT_YOUR_API_KEY_HERE";
+        private string apiKey = "PUT_YOUR_API_KEY_HERE";
 
         /**
          * Sample host. this should be the name of the Kount Access API server you want to connect to. We will use sandbox01
          * as the example.
          */
         private string host = "https://api-sandbox01.kountaccess.com";
-
-        //string host = "https://999999.kountaccess.com";
-        string apiKey = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI5MDA0MzIiLCJhdWQiOiJLb3VudC4xIiwiaWF0IjoxNTg2NTMxMDcxLCJzY3AiOnsia2EiOnRydWUsImtjIjpmYWxzZSwiYXBpIjp0cnVlLCJyaXMiOnRydWV9fQ.V_c2Uw0EkXiVmEIlUZoGsw_ybC324LSvwFXsfUhOQNQ";
-
 
         /// <summary>
         /// Simple Example within the Constructor.
@@ -72,14 +68,6 @@ namespace KountAccessExample
                 // Create the SDK. If any of these values are invalid, an com.kount.kountaccess.AccessException will be
                 // thrown along with a message detailing why.
                 AccessSdk sdk = new AccessSdk(host, merchantId, apiKey);
-
-
-                DecisionInfo decisionInfo = sdk.GetDecision("faa6370074b53928bc51ef913441e0cd", "bingyan.sahoo@intimetec.com", "Kount@123");
-                Decision decision = decisionInfo.Decision;
-                // Let's look at the data
-                this.PrintDecisionInfo(decision);
-
-
 
                 // If you want the device information for a particular user's session, just pass in the sessionId. This
                 // contains the id (fingerprint), IP address, IP Geo Location (country), whether the user was using a proxy
@@ -121,10 +109,10 @@ namespace KountAccessExample
                         "The number of unique user access request(s) this hour for this device is:" + numUsersForDevice);
 
                 // Decision Information is stored in a JSONObject, by entity type
-                //DecisionInfo decisionInfo = sdk.GetDecision(session, username, password);
-                //Decision decision = decisionInfo.Decision;
-                //// Let's look at the data
-                //this.PrintDecisionInfo(decision);
+                DecisionInfo decisionInfo = sdk.GetDecision(session, username, password);
+                Decision decision = decisionInfo.Decision;
+                // Let's look at the data
+                this.PrintDecisionInfo(decision);
 
                 // Get Kount Access data for session based on what was requested in the info flag
                 String uniq = "uniq(customer identifier)";
@@ -139,6 +127,7 @@ namespace KountAccessExample
                 this.PrintDecisionInfo(info.Decision);
                 this.PrintVelocityInfo(info.Velocity);
                 this.PrintFields(info.Trusted);
+                this.PrintFields(info.BehavioSec);
 
                 // Get devices that belong to a uniq user.
                 DevicesInfo devices = sdk.GetDevices(uniq);
@@ -163,7 +152,11 @@ namespace KountAccessExample
 
                 // Update behavior data.    
                 string timing = "timing data";
+                // BehavioHost and BehavioEnvironment can be set via AccessSdk constructor too.
+               // sdk.BehavioHost = "https://api.behavio.kaptcha.com";
+                //sdk.BehavioEnvironment = "sandbox";
 
+                //sdk.SetBehavioSec(session, uniq, timing);
             }
             catch (AccessException ae)
             {

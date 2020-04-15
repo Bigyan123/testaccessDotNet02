@@ -106,6 +106,14 @@ namespace KountAccessTest
             info.Velocity = velocityInfo.Velocity;
             info.ResponseId = responseId;
             info.Trusted = new TrustState() { State = DeviceTrustState.Trusted };
+            info.BehavioSec = new BehavioSec()
+            {
+                Confidence = 0,
+                IsBot = false,
+                IsTrained = false,
+                PolicyId = 4,
+                Score = 0
+            };
 
             jsonInfo = JsonConvert.SerializeObject(info);
 

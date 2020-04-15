@@ -60,6 +60,7 @@
     <Compile Include="Log\Factory\NopLoggerFactory.cs" />
     <Compile Include="Log\Factory\SimpleLoggerFactory.cs" />
     <Compile Include="Models\AccessException.cs" />
+    <Compile Include="Models\BehavioSec.cs" />
     <Compile Include="Models\DataSetElements.cs" />
     <Compile Include="Models\Decision.cs" />
     <Compile Include="Models\DecisionInfo.cs" />

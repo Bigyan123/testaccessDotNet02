@@ -89,6 +89,8 @@ namespace KountAccessTest
             Assert.AreEqual(8, dataSetNumber);
         }
 
+     
+
         #endregion
 
         #region Call Build with two "with" included
@@ -141,6 +143,8 @@ namespace KountAccessTest
             Assert.AreEqual(12, dataSetNumber);
         }
 
+      
+
         #endregion
 
         #region Call Build with three "with" included
@@ -177,6 +181,22 @@ namespace KountAccessTest
 
             // Assert
             Assert.AreEqual(14, dataSetNumber);
+        }
+
+        [Test]
+        public void TestCallBuildWith_Decision_TrustedDeviceInfo_BehavioSec_ShouldReturnTwentyfour()
+        {
+            // Arrange
+            var dataSetElements = new DataSetElements();
+
+            // Act
+            var dataSetNumber = dataSetElements
+                .WithDecision()
+                .WithTrusted()
+                .Build();
+
+            // Assert
+            Assert.AreEqual(28, dataSetNumber);
         }
 
         #endregion
